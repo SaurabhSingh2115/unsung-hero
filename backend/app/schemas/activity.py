@@ -1,0 +1,1 @@
+# Activity request/response shapes

@@ -1,0 +1,1 @@
+<!-- Prompt: detect ghost credit -->

@@ -1,0 +1,1 @@
+// Bootstraps the Angular app

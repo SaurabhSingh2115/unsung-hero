@@ -1,0 +1,1 @@
+<!-- Prompt: classify an activity -->

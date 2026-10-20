@@ -1,0 +1,1 @@
+# Handles manually logged activities
