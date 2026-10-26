@@ -1,0 +1,89 @@
+{
+  "description": "Priya onboarding new hire Dev (buddy program).",
+  "threads": [
+    {
+      "space": "payments-team",
+      "start": "2026-08-18T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Welcome @Dev to the team! 🎉 I'll be your onboarding buddy. Start with the payments onboarding guide (go/payments-onboarding) and grab 30 min with me tomorrow.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-08-19T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Here's your week-1 plan: env setup, read the ledger ADRs, ship a tiny PR by Friday. I've set up daily 15-min check-ins.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-08-21T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Booked you a session with Meera to understand the product side, and with Rahul for fraud context.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-25T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "@Dev shipped his first PR today in week 1 🎉 — thanks to everyone who reviewed.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-09-01T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Week 3 check-in: you're ready to pick up the velocity checks ticket solo. I'll be your reviewer.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-09-08T10:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "For new folks: I recorded a 20-min walkthrough of the payments architecture — link is in the onboarding guide.",
+          "label": "onboarding",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+[
+  {
+    "id": "doc-onboarding-guide",
+    "title": "Payments Onboarding Guide",
+    "owner": "priya",
+    "project": "onboarding",
+    "kind": "guide",
+    "created": "2026-07-28",
+    "comments": [
+      {
+        "author": "dev",
+        "date": "2026-08-19",
+        "text": "This guide saved me so much time on day 1 — the bootstrap section especially.",
+        "label": "documentation"
+      },
+      {
+        "author": "lin",
+        "date": "2026-08-29",
+        "text": "Used the warehouse access section for my research setup, super clear.",
+        "label": "documentation"
+      },
+      {
+        "author": "rahul",
+        "date": "2026-09-03",
+        "text": "Linked this from the fraud team README, it's the best intro we have.",
+        "label": "documentation"
+      },
+      {
+        "author": "sana",
+        "date": "2026-09-10",
+        "text": "Even as a designer this helped me understand the payment flows.",
+        "label": "documentation"
+      },
+      {
+        "author": "karan",
+        "date": "2026-09-22",
+        "text": "Let's make this the template for every team's onboarding doc.",
+        "label": "documentation"
+      },
+      {
+        "author": "dev",
+        "date": "2026-10-02",
+        "text": "Added a FAQ section based on my first month (Priya reviewed).",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-ledger-runbook",
+    "title": "Ledger Backfill Runbook",
+    "owner": "priya",
+    "project": "billing-v2",
+    "kind": "guide",
+    "created": "2026-08-04",
+    "comments": [
+      {
+        "author": "arjun",
+        "date": "2026-08-05",
+        "text": "Followed this for the Billing v2 backfill, worked first time.",
+        "label": "documentation"
+      },
+      {
+        "author": "rahul",
+        "date": "2026-09-17",
+        "text": "Reused for the fraud events backfill.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-billing-v2-design",
+    "title": "Billing v2 Design Doc",
+    "owner": "arjun",
+    "project": "billing-v2",
+    "kind": "design",
+    "created": "2026-07-22",
+    "comments": [
+      {
+        "author": "priya",
+        "date": "2026-07-23",
+        "text": "The retry section needs an idempotency story — what happens if the worker dies after charging but before marking paid? Suggest an outbox pattern; sketched it below.",
+        "label": "review"
+      },
+      {
+        "author": "priya",
+        "date": "2026-07-23",
+        "text": "Capacity estimate assumes 1 invoice per merchant per month but enterprise merchants do daily invoicing. Recomputed: we need 3x the queue throughput.",
+        "label": "documentation"
+      },
+      {
+        "author": "priya",
+        "date": "2026-07-24",
+        "text": "Migration plan is missing a rollback step for the ledger schema change. Added a proposal.",
+        "label": "review"
+      },
+      {
+        "author": "rahul",
+        "date": "2026-07-24",
+        "text": "Should fraud checks run before invoice finalisation?",
+        "label": "documentation"
+      },
+      {
+        "author": "meera",
+        "date": "2026-07-25",
+        "text": "Product perspective: dunning emails need merchant-configurable timing.",
+        "label": "documentation"
+      },
+      {
+        "author": "karan",
+        "date": "2026-07-26",
+        "text": "Approved. Great doc, Arjun.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-checkout-prd",
+    "title": "Checkout Redesign PRD",
+    "owner": "meera",
+    "project": "checkout-redesign",
+    "kind": "design",
+    "created": "2026-08-10",
+    "comments": [
+      {
+        "author": "sana",
+        "date": "2026-08-11",
+        "text": "Mocks for the saved-methods flow linked in section 3.",
+        "label": "documentation"
+      },
+      {
+        "author": "lin",
+        "date": "2026-08-12",
+        "text": "Research shows merchants distrust saved cards — added quotes.",
+        "label": "documentation"
+      },
+      {
+        "author": "priya",
+        "date": "2026-08-13",
+        "text": "Tech note: 3DS partial-save is feasible via pending tokens, details in appendix.",
+        "label": "documentation"
+      },
+      {
+        "author": "arjun",
+        "date": "2026-08-14",
+        "text": "Eng estimate: 3 sprints for saved methods.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-fraud-rules-design",
+    "title": "Fraud Rules Engine Design",
+    "owner": "rahul",
+    "project": "fraud-alerts",
+    "kind": "design",
+    "created": "2026-08-01",
+    "comments": [
+      {
+        "author": "priya",
+        "date": "2026-08-02",
+        "text": "Rule ordering must be explicit — lexical load order will bite us in prod. Suggest a priority field.",
+        "label": "review"
+      },
+      {
+        "author": "priya",
+        "date": "2026-08-02",
+        "text": "Consider a shadow mode before enforcing; gives us FP data for free.",
+        "label": "documentation"
+      },
+      {
+        "author": "dev",
+        "date": "2026-09-05",
+        "text": "Question: how are rule conflicts resolved?",
+        "label": "documentation"
+      },
+      {
+        "author": "karan",
+        "date": "2026-08-04",
+        "text": "Approved, nice work Rahul.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-q4-planning",
+    "title": "Q4 Planning — Pricing Performance",
+    "owner": "arjun",
+    "project": "edge-cache",
+    "kind": "planning",
+    "created": "2026-09-18",
+    "comments": [
+      {
+        "author": "karan",
+        "date": "2026-09-19",
+        "text": "Love the edge cache proposal Arjun, let's prioritise it for Q4.",
+        "label": "documentation"
+      },
+      {
+        "author": "meera",
+        "date": "2026-09-20",
+        "text": "Product supports this — latency is a top merchant complaint.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-research-readout",
+    "title": "Merchant Trust Research Readout",
+    "owner": "lin",
+    "project": "research-study",
+    "kind": "design",
+    "created": "2026-09-24",
+    "comments": [
+      {
+        "author": "meera",
+        "date": "2026-09-25",
+        "text": "This changes our saved-cards messaging. Sharing with eng.",
+        "label": "documentation"
+      },
+      {
+        "author": "sana",
+        "date": "2026-09-25",
+        "text": "Updating the trust badges in the mocks based on this.",
+        "label": "documentation"
+      }
+    ]
+  },
+  {
+    "id": "doc-incident-retro-0827",
+    "title": "Retro: Invoice generation Sev2 (Aug 27)",
+    "owner": "priya",
+    "project": "billing-v2",
+    "kind": "guide",
+    "created": "2026-08-28",
+    "comments": [
+      {
+        "author": "karan",
+        "date": "2026-08-29",
+        "text": "Thorough retro, thanks Priya. Action items assigned.",
+        "label": "documentation"
+      }
+    ]
+  }
+]

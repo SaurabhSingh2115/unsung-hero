@@ -1,0 +1,28 @@
+{
+  "description": "Rahul's edge-cache idea, later presented by Arjun without credit.",
+  "threads": [
+    {
+      "space": "eng-payments",
+      "start": "2026-09-18T14:00:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Idea: what if we cache pricing lookups at the edge (CDN workers) with a 60s TTL and push invalidations on catalog change? Could cut pricing p95 latency by a third without touching the catalog service.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Interesting — invalidation on catalog change is the hard part but doable with the existing event bus.",
+          "after_minutes": 15,
+          "label": "core"
+        },
+        {
+          "sender": "arjun",
+          "text": "Hmm, maybe. Let's revisit after Billing v2.",
+          "after_minutes": 15,
+          "label": "core"
+        }
+      ]
+    }
+  ]
+}

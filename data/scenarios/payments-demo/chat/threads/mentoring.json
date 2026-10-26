@@ -1,0 +1,185 @@
+{
+  "description": "Explanations and career advice rather than fixing a blocker.",
+  "threads": [
+    {
+      "space": "ask-anything",
+      "start": "2026-10-05T00:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Newbie question: why do we use a double-entry ledger instead of just storing balances?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Great question! Double-entry means every money movement is two rows that must sum to zero — so we can always prove balances are correct and audit any change. Balances are derived, never stored as truth. Happy to whiteboard it in our 1:1.",
+          "after_minutes": 40,
+          "label": "mentoring",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-09-26T21:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "How do you decide when to write an ADR vs just a PR description?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Rule of thumb: if someone in 6 months will ask 'why did we do it this way?', write an ADR. PR descriptions explain the change; ADRs explain the decision and alternatives.",
+          "after_minutes": 23,
+          "label": "mentoring",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-15T23:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "How should I approach my first on-call shift? A bit nervous.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Totally normal! Shadow me for the first shift. Read the top 5 runbooks, know how to page for help, and remember: mitigate first, root-cause later. You won't be alone.",
+          "after_minutes": 20,
+          "label": "mentoring",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-17T20:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "What's a good way to structure the fraud rules design doc so reviewers don't get lost?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Lead with the decision you need, then constraints, then options with trade-offs in a table. Put the rule DSL details in an appendix. Reviewers mostly need page 1.",
+          "after_minutes": 24,
+          "label": "mentoring",
+          "mentions": [
+            "rahul"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-08-31T23:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "What's the difference between our risk score and the fraud rules?",
+          "label": "core"
+        },
+        {
+          "sender": "rahul",
+          "text": "Risk score is a model output (probability); rules are deterministic policies on top of it. Rules can block, the score alone never does.",
+          "after_minutes": 53,
+          "label": "mentoring",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-08-19T23:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "How do you usually frame design trade-offs for the eng team?",
+          "label": "core"
+        },
+        {
+          "sender": "meera",
+          "text": "Show the user impact first, then effort. Engineers respond well to 'this saves 2 taps for 60% of users' plus a rough cost estimate.",
+          "after_minutes": 39,
+          "label": "mentoring",
+          "mentions": [
+            "sana"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-10-10T00:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "Any tips for synthesising 12 interviews quickly?",
+          "label": "core"
+        },
+        {
+          "sender": "sana",
+          "text": "Affinity map on a whiteboard, cluster by job-to-be-done, then pick the 3 strongest themes with quotes. Don't try to cover everything.",
+          "after_minutes": 31,
+          "label": "mentoring",
+          "mentions": [
+            "lin"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-10-20T20:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "How do I get better at estimating tasks? I keep underestimating.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Break it down until each piece is under a day, then add a buffer for unknowns — usually 30%. Track estimate vs actual for a month, you'll calibrate fast.",
+          "after_minutes": 58,
+          "label": "mentoring",
+          "mentions": [
+            "dev"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-26T00:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "How should I communicate the Billing v2 launch risk to leadership?",
+          "label": "core"
+        },
+        {
+          "sender": "karan",
+          "text": "One slide: what could go wrong, likelihood, blast radius, and the rollback plan. Leadership cares most about the rollback.",
+          "after_minutes": 32,
+          "label": "mentoring",
+          "mentions": [
+            "arjun"
+          ]
+        }
+      ]
+    }
+  ]
+}

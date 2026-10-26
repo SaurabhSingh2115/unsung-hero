@@ -1,0 +1,335 @@
+{
+  "description": "Plain core-work status chatter (no help given).",
+  "threads": [
+    {
+      "space": "eng-payments",
+      "start": "2026-08-22T23:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Billing v2: invoice generation service is feature complete behind the flag.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-08-24T02:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Billing v2 is now live for 10% of merchants. Error rate looks healthy.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-10-09T18:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Billing v2 at 50% rollout. Invoice failures down from 4.1% to 0.9% in the cohort.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-10-18T23:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "🚀 Billing v2 is 100% live! Invoice failure rate at 0.6%. Huge milestone.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-04T18:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Starting work on the dunning emails for Billing v2 today.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-17T23:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Pushed the new invoice PDF renderer to staging.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-11T21:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Fraud alerts v1 is deployed to staging, starting shadow mode.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-10T21:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Shadow mode results: rules would have caught 18% more chargebacks with 0.2% false positives.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-10-14T19:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Fraud alerts are live for all merchants 🎉",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-14T01:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Merged my velocity checks PR, monitoring in canary.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-12T02:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Working on rule evaluation metrics this week.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-19T20:30:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Updated the payments onboarding guide with the new bootstrap steps.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-03T02:30:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Heads up: I'm rotating the staging DB credentials at 4pm, ~2 min blip.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-08-24T22:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Checkout redesign PRD v2 is out for review — feedback by Friday please.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-10T03:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Design has finalised the saved-methods flow; sharing Sana's mocks here for eng feasibility.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-26T21:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Summarising design review: we're dropping the carousel, keeping the 2-step flow. Eng estimate needed by Wed.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-10-11T21:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Eng says the 3DS partial-save is feasible (thanks to Priya's note). Let's keep it in scope.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-12T00:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Eng estimate for saved methods: 3 sprints. Can we simplify the edit flow?",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-10-25T23:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Lin's readout is on Thursday — please send questions in advance.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-29T02:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "New mocks for the saved-methods flow are up in Figma.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-29T19:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Updated error states using the codes list from engineering.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-03T21:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "Interview synthesis is done: top theme is merchants don't trust saved cards.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-08-11T23:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "Research readout deck is ready for review.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-08-06T03:30:00",
+      "messages": [
+        {
+          "sender": "karan",
+          "text": "Reminder: Q4 planning docs due next Friday.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-10-12T21:30:00",
+      "messages": [
+        {
+          "sender": "karan",
+          "text": "Great quarter everyone — Billing v2 and fraud alerts both shipped. Proud of this team.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-17T21:30:00",
+      "messages": [
+        {
+          "sender": "karan",
+          "text": "Sprint planning moved to 11am tomorrow.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-03T19:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Started the Q4 planning doc for pricing performance.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-22T18:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Pricing service p95 is 420ms, mostly catalog lookups. Digging in.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-09-01T19:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Checkout redesign usability test round 1 done — 9/10 completed the saved-methods flow.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "payments-team",
+      "start": "2026-08-07T23:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Finished my first on-call shift! Thanks for the support everyone.",
+          "label": "core"
+        }
+      ]
+    }
+  ]
+}

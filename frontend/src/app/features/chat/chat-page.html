@@ -1,0 +1,151 @@
+<div class="flex h-full flex-col bg-gchat-bg font-chat text-[#1f1f1f]">
+  <!-- Top bar -->
+  <header class="flex h-16 shrink-0 items-center gap-4 pl-4 pr-4">
+    <div class="flex w-[260px] shrink-0 items-center gap-2 pl-2">
+      <span class="material-symbols-outlined text-[34px] text-gchat-green" style="font-variation-settings: 'FILL' 1" aria-hidden="true">chat</span>
+      <span class="text-[22px] text-[#444746]">Chat</span>
+    </div>
+
+    <label class="search flex h-12 max-w-[720px] flex-1 items-center gap-3 rounded-full bg-[#e9eef6] px-4 focus-within:bg-white focus-within:shadow-[0_1px_3px_rgba(0,0,0,.2)]">
+      <span class="material-symbols-outlined text-[22px] text-[#444746]" aria-hidden="true">search</span>
+      <input #searchBox type="search" class="h-full w-full bg-transparent text-[15px] outline-none placeholder:text-[#5f6368]"
+        [placeholder]="space() ? 'Search in ' + space()!.name : 'Search messages'"
+        aria-label="Search messages in this conversation"
+        [value]="search()" (input)="search.set(searchBox.value)" (keydown.escape)="clearSearch(searchBox)" [disabled]="!space()" />
+      @if (search()) {
+        <button type="button" class="icon-btn h-9! w-9!" aria-label="Clear search" (click)="clearSearch(searchBox)">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      }
+    </label>
+
+    <div class="ml-auto flex items-center gap-2">
+      @if (offline() && spaces().length) {
+        <span class="chip bg-[#fce8e6] text-[#b3261e]" role="status">
+          <span class="material-symbols-outlined mr-1 text-[16px]">cloud_off</span> Reconnecting…
+        </span>
+      }
+      <a routerLink="/" class="flex items-center gap-1 rounded-full border border-[#c4c7c5] bg-white px-3 py-1.5 text-[13px] font-medium text-[#0b57d0] hover:bg-[#f2f6fc] focus-visible:outline-2 focus-visible:outline-gchat-blue"
+        aria-label="Open Unsung">
+        Open Unsung <span aria-hidden="true">↗</span>
+      </a>
+      <chat-persona-switcher (changed)="onPersonaChanged()" />
+    </div>
+  </header>
+
+  @if (spacesError() && !spaces().length) {
+    <!-- Can't load anything -->
+    <div class="flex flex-1 items-center justify-center p-6">
+      <div class="max-w-md rounded-2xl bg-white p-8 text-center shadow-sm">
+        <span class="material-symbols-outlined text-[48px] text-[#9aa0a6]">cloud_off</span>
+        <h1 class="mt-2 text-lg font-medium">{{ spacesError() }}</h1>
+        <p class="mt-1 text-sm text-[#5f6368]">The Chat backend doesn't seem to be responding. Make sure the API server is running on port 8000, then try again.</p>
+        <button type="button" class="mt-5 rounded-full bg-gchat-blue px-5 py-2 text-sm font-medium text-white hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gchat-blue cursor-pointer" (click)="retryAll()">Try again</button>
+      </div>
+    </div>
+  } @else {
+    <div class="flex min-h-0 flex-1 pb-4 pr-4">
+      <!-- Left rail -->
+      <aside class="w-[300px] shrink-0" aria-label="Chats and spaces">
+        <chat-space-list [spaces]="spaces()" [selectedId]="selectedId()" [loading]="!spacesLoaded()" (newChat)="dmError.set(null); showNewChat.set(true)" />
+      </aside>
+
+      <!-- Main pane -->
+      <main class="flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl bg-white">
+        @if (space(); as s) {
+          <header class="flex h-16 shrink-0 items-center gap-3 border-b border-[#e3e3e3] px-5">
+            @if (s.kind === 'dm') {
+              <chat-avatar [personId]="dmPeer()" [size]="36" />
+            } @else {
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#d3e3fd] text-[15px] font-medium text-[#041e49]" aria-hidden="true">{{ s.name.charAt(0).toUpperCase() }}</span>
+            }
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <h1 class="truncate text-[17px] text-[#1f1f1f]">{{ s.name }}</h1>
+                @if (s.opted_in_to_unsung) {
+                  <span class="chip shrink-0 gap-1 bg-[#e6f4ea] text-[#137333]" title="Messages in this space are analyzed by Unsung (members opted in)">
+                    <span class="material-symbols-outlined text-[14px]">hub</span> Shared with Unsung (opt-in)
+                  </span>
+                }
+              </div>
+              <p class="truncate text-xs text-[#5f6368]">
+                {{ s.member_ids.length }} {{ s.member_ids.length === 1 ? 'member' : 'members' }}@if (s.description) { · {{ s.description }} }
+              </p>
+            </div>
+            <div class="flex items-center" [attr.aria-label]="s.member_ids.length + ' members'" role="group">
+              <div class="flex -space-x-2">
+                @for (id of headerMembers(); track id) {
+                  <chat-avatar [personId]="id" [size]="28" [ring]="true" [title]="true" />
+                }
+              </div>
+              @if (s.member_ids.length > headerMembers().length) {
+                <span class="ml-1 text-xs font-medium text-[#444746]">+{{ s.member_ids.length - headerMembers().length }}</span>
+              }
+            </div>
+          </header>
+
+          @if (!s.opted_in_to_unsung) {
+            <div class="flex shrink-0 items-center gap-2 border-b border-[#e3e3e3] bg-[#f8f9fa] px-5 py-2 text-[13px] text-[#444746]" role="note">
+              <span class="material-symbols-outlined text-[18px] text-[#747775]">visibility_off</span>
+              This space is not shared with Unsung — messages here are never analyzed.
+            </div>
+          }
+
+          @if (messagesError()) {
+            <div class="flex flex-1 flex-col items-center justify-center p-6 text-center">
+              <span class="material-symbols-outlined text-[44px] text-[#9aa0a6]">error</span>
+              <p class="mt-2 text-sm text-[#444746]">{{ messagesError() }}</p>
+              <button type="button" class="mt-4 rounded-full border border-[#c4c7c5] px-4 py-1.5 text-sm font-medium text-gchat-blue hover:bg-[#f2f6fc] cursor-pointer" (click)="retryAll()">Try again</button>
+            </div>
+          } @else if (messagesLoading()) {
+            <div class="flex-1 space-y-5 overflow-hidden p-6" aria-busy="true" aria-label="Loading messages">
+              @for (i of [1,2,3,4]; track i) {
+                <div class="flex animate-pulse gap-3">
+                  <div class="h-8 w-8 rounded-full bg-[#e1e5ea]"></div>
+                  <div class="flex-1 space-y-2"><div class="h-3 w-40 rounded bg-[#e1e5ea]"></div><div class="h-3 w-3/4 rounded bg-[#eceff3]"></div><div class="h-3 w-1/2 rounded bg-[#eceff3]"></div></div>
+                </div>
+              }
+            </div>
+          } @else {
+            <chat-message-list class="flex-1"
+              [messages]="messages()" [failedIds]="failedIds()" [query]="search()"
+              [highlightId]="highlightId()" [scrollToken]="scrollToken()"
+              (openThread)="openThread($event)" (retry)="retry($event)" (discard)="discard($event)" />
+          }
+
+          <div class="shrink-0 px-5 pb-4 pt-1">
+            <chat-composer [placeholder]="'Message ' + s.name" [members]="mentionable()" [disabled]="!!messagesError()" (send)="send($event)" />
+            <p class="mt-1.5 px-5 text-[11px] text-[#5f6368]">
+              @if (s.opted_in_to_unsung) { Posting as {{ session.chatUser()?.name ?? session.chatUserId() }} · new messages are shared with Unsung }
+              @else { Posting as {{ session.chatUser()?.name ?? session.chatUserId() }} }
+            </p>
+          </div>
+        } @else if (!spacesLoaded() || (selectedId() && !messagesError())) {
+          <div class="flex flex-1 items-center justify-center text-sm text-[#5f6368]" aria-busy="true">
+            <span class="material-symbols-outlined mr-2 animate-spin text-[20px]">progress_activity</span> Loading…
+          </div>
+        } @else {
+          <div class="flex flex-1 flex-col items-center justify-center p-6 text-center text-[#5f6368]">
+            <span class="material-symbols-outlined text-[56px] text-[#c4c7c5]">forum</span>
+            <p class="mt-2 text-[15px] text-[#444746]">{{ messagesError() ?? 'No conversations yet' }}</p>
+            <p class="text-sm">Start a direct message with “New chat”.</p>
+          </div>
+        }
+      </main>
+
+      <!-- Thread panel -->
+      @if (threadRootId() && space()) {
+        <aside class="ml-3 flex w-[400px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white" aria-label="Thread">
+          <chat-thread-panel class="h-full"
+            [root]="threadRoot()" [replies]="threadReplies()" [members]="mentionable()" [spaceName]="space()!.name"
+            [highlightId]="highlightId()" [failedIds]="failedIds()"
+            (close)="closeThread()" (send)="send($event, threadRootId())" (retry)="retry($event)" (discard)="discard($event)" />
+        </aside>
+      }
+    </div>
+  }
+
+  @if (showNewChat()) {
+    <chat-new-chat-dialog [busy]="dmBusy()" [error]="dmError()" (pick)="openDm($event)" (closed)="showNewChat.set(false)" />
+  }
+</div>

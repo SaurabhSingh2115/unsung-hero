@@ -1,0 +1,102 @@
+[
+  {
+    "id": "pr-412",
+    "author": "arjun",
+    "reviewer": "priya",
+    "project": "billing-v2",
+    "reviewed_at": "2026-10-11T01:30:00",
+    "request": "Can someone review PR #412 (invoice retry backoff)? ~300 lines.",
+    "review": "Reviewed #412 — left 9 comments. Main one: the backoff needs jitter or all retries will stampede at the same second. Otherwise looks solid.",
+    "label": "review"
+  },
+  {
+    "id": "pr-438",
+    "author": "arjun",
+    "reviewer": "priya",
+    "project": "billing-v2",
+    "reviewed_at": "2026-09-12T01:30:00",
+    "request": "PR #438 is up: Billing v2 webhook delivery. Would love eyes today 🙏",
+    "review": "Done. Two blocking comments on signature verification ordering, rest are nits. Approved once those are fixed.",
+    "label": "review"
+  },
+  {
+    "id": "pr-445",
+    "author": "dev",
+    "reviewer": "priya",
+    "project": "fraud-alerts",
+    "reviewed_at": "2026-10-11T01:30:00",
+    "request": "My first real PR: #445 adds velocity checks to fraud rules. Be gentle 😅",
+    "review": "Reviewed #445 — really nice first PR! Left some notes on naming and one on a missing test for the boundary case. Explained the why for each.",
+    "label": "review"
+  },
+  {
+    "id": "pr-451",
+    "author": "rahul",
+    "reviewer": "priya",
+    "project": "fraud-alerts",
+    "reviewed_at": "2026-10-03T01:30:00",
+    "request": "PR #451 — fraud alert dedup. Could use a careful review, it touches the hot path.",
+    "review": "Went through #451 line by line and ran the benchmark: dedup adds 0.3ms p99, acceptable. Suggested a bloom filter for the next iteration.",
+    "label": "review"
+  },
+  {
+    "id": "pr-460",
+    "author": "arjun",
+    "reviewer": "rahul",
+    "project": "billing-v2",
+    "reviewed_at": "2026-09-05T01:30:00",
+    "request": "PR #460: invoice PDF templates refactor.",
+    "review": "LGTM, one nit on the template naming.",
+    "label": "review"
+  },
+  {
+    "id": "pr-466",
+    "author": "dev",
+    "reviewer": "rahul",
+    "project": "fraud-alerts",
+    "reviewed_at": "2026-08-24T01:30:00",
+    "request": "PR #466 adds metrics for rule evaluations.",
+    "review": "Reviewed, small comments. Looks good.",
+    "label": "review"
+  },
+  {
+    "id": "pr-470",
+    "author": "arjun",
+    "reviewer": "priya",
+    "project": "billing-v2",
+    "reviewed_at": "2026-08-24T01:30:00",
+    "request": "PR #470: Billing v2 migration cutover script. This one is scary.",
+    "review": "Reviewed #470 and dry-ran it against the staging snapshot. Found an off-by-one in the batch cursor that would have skipped 1 in 10k invoices. Fix suggested inline.",
+    "label": "review"
+  },
+  {
+    "id": "pr-474",
+    "author": "priya",
+    "reviewer": "rahul",
+    "project": "onboarding",
+    "reviewed_at": "2026-10-06T01:30:00",
+    "request": "PR #474: onboarding bootstrap script pins tool versions.",
+    "review": "LGTM 👍",
+    "label": "review"
+  },
+  {
+    "id": "pr-481",
+    "author": "rahul",
+    "reviewer": "arjun",
+    "project": "edge-cache",
+    "reviewed_at": "2026-09-26T01:30:00",
+    "request": "PR #481: pricing latency instrumentation.",
+    "review": "Looks fine, approved.",
+    "label": "review"
+  },
+  {
+    "id": "pr-488",
+    "author": "dev",
+    "reviewer": "priya",
+    "project": "fraud-alerts",
+    "reviewed_at": "2026-10-05T01:30:00",
+    "request": "PR #488: fraud rules priority ordering (from Rahul's thread).",
+    "review": "Reviewed #488 — good fix. Added a suggestion to validate priorities are unique at load time so this can't regress.",
+    "label": "review"
+  }
+]

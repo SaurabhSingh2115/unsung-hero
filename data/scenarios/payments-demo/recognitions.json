@@ -1,0 +1,51 @@
+[
+  {
+    "from": "dev",
+    "to": "priya",
+    "type": "kudos",
+    "message": "Thanks Priya for helping me setup my dev env and being an awesome buddy!",
+    "sent_at": "2026-09-15T12:00:00"
+  },
+  {
+    "from": "arjun",
+    "to": "priya",
+    "type": "kudos",
+    "message": "Thanks for catching the test clock issue on billing.",
+    "sent_at": "2026-09-19T12:00:00"
+  },
+  {
+    "from": "rahul",
+    "to": "priya",
+    "type": "kudos",
+    "message": "Thanks for unblocking the fraud rule engine sorting.",
+    "sent_at": "2026-09-23T12:00:00"
+  },
+  {
+    "from": "dev",
+    "to": "rahul",
+    "type": "kudos",
+    "message": "Thanks Rahul for the test parallelization tip!",
+    "sent_at": "2026-09-27T12:00:00"
+  },
+  {
+    "from": "sana",
+    "to": "meera",
+    "type": "kudos",
+    "message": "Thanks Meera for the checkout screen priorities.",
+    "sent_at": "2026-10-01T12:00:00"
+  },
+  {
+    "from": "lin",
+    "to": "meera",
+    "type": "kudos",
+    "message": "Thanks Meera for merchant intro!",
+    "sent_at": "2026-10-05T12:00:00"
+  },
+  {
+    "from": "karan",
+    "to": "arjun",
+    "type": "peer_bonus",
+    "message": "Huge congratulations on delivering Billing v2!",
+    "sent_at": "2026-10-09T12:00:00"
+  }
+]

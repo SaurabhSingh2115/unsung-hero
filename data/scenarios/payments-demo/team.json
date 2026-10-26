@@ -1,0 +1,121 @@
+{
+  "team": {
+    "id": "payments",
+    "name": "Payments Platform",
+    "email_domain": "payments.internal"
+  },
+  "people": [
+    {
+      "id": "priya",
+      "name": "Priya Sharma",
+      "role": "employee",
+      "title": "Senior Software Engineer",
+      "level": "L4",
+      "discipline": "Engineering",
+      "location": "office",
+      "city": "Bangalore",
+      "avatar_color": "#d97706",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Unblocks everyone, reviews the most, thanked the least. The hero."
+    },
+    {
+      "id": "arjun",
+      "name": "Arjun Mehta",
+      "role": "employee",
+      "title": "Software Engineer",
+      "level": "L4",
+      "discipline": "Engineering",
+      "location": "office",
+      "city": "Bangalore",
+      "avatar_color": "#4f46e5",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Ships the Billing v2 launch, mostly unblocked by Priya."
+    },
+    {
+      "id": "rahul",
+      "name": "Rahul Verma",
+      "role": "employee",
+      "title": "Software Engineer",
+      "level": "L3",
+      "discipline": "Engineering",
+      "location": "remote",
+      "city": "Pune",
+      "avatar_color": "#0891b2",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Remote. His edge-cache idea gets presented by someone else (ghost credit)."
+    },
+    {
+      "id": "meera",
+      "name": "Meera Iyer",
+      "role": "employee",
+      "title": "Product Manager",
+      "level": "L5",
+      "discipline": "Product",
+      "location": "office",
+      "city": "Bangalore",
+      "avatar_color": "#db2777",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Bridges Design and Engineering."
+    },
+    {
+      "id": "karan",
+      "name": "Karan Kapoor",
+      "role": "manager",
+      "title": "Engineering Manager",
+      "level": "L6",
+      "discipline": "Management",
+      "location": "office",
+      "city": "Bangalore",
+      "avatar_color": "#1e1b4b",
+      "manager_id": null,
+      "opted_in": true,
+      "story": "The manager. Uses the manager view."
+    },
+    {
+      "id": "sana",
+      "name": "Sana Khan",
+      "role": "employee",
+      "title": "Product Designer",
+      "level": "L4",
+      "discipline": "Design",
+      "location": "office",
+      "city": "Bangalore",
+      "avatar_color": "#16a34a",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Designs the checkout redesign."
+    },
+    {
+      "id": "dev",
+      "name": "Dev Patel",
+      "role": "employee",
+      "title": "Software Engineer",
+      "level": "L3",
+      "discipline": "Engineering",
+      "location": "remote",
+      "city": "Ahmedabad",
+      "avatar_color": "#7c3aed",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "New hire (joined Aug 18), being onboarded."
+    },
+    {
+      "id": "lin",
+      "name": "Lin Chen",
+      "role": "employee",
+      "title": "UX Researcher",
+      "level": "L3",
+      "discipline": "Design",
+      "location": "remote",
+      "city": "Singapore",
+      "avatar_color": "#ea580c",
+      "manager_id": "karan",
+      "opted_in": true,
+      "story": "Runs merchant research."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "billing-v2",
+    "name": "Billing v2 launch",
+    "owners": [
+      "arjun"
+    ],
+    "start": "2026-07-20",
+    "end": "2026-10-10",
+    "doc_file": "launch_docs/billing-v2.md"
+  },
+  {
+    "id": "fraud-alerts",
+    "name": "Fraud alerts v1",
+    "owners": [
+      "rahul"
+    ],
+    "start": "2026-08-01",
+    "end": "2026-10-01",
+    "doc_file": "launch_docs/fraud-alerts.md"
+  },
+  {
+    "id": "checkout-redesign",
+    "name": "Checkout redesign",
+    "owners": [
+      "sana",
+      "meera"
+    ],
+    "start": "2026-08-10",
+    "end": null,
+    "doc_file": "launch_docs/checkout-redesign.md"
+  },
+  {
+    "id": "onboarding",
+    "name": "Payments onboarding program",
+    "owners": [
+      "priya"
+    ],
+    "start": "2026-07-28",
+    "end": null,
+    "doc_file": "launch_docs/onboarding.md"
+  },
+  {
+    "id": "edge-cache",
+    "name": "Pricing edge cache",
+    "owners": [
+      "arjun"
+    ],
+    "start": "2026-09-18",
+    "end": null,
+    "doc_file": "launch_docs/edge-cache.md"
+  },
+  {
+    "id": "research-study",
+    "name": "Merchant trust research",
+    "owners": [
+      "lin"
+    ],
+    "start": "2026-08-15",
+    "end": "2026-09-24",
+    "doc_file": "launch_docs/research-study.md"
+  }
+]

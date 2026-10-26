@@ -1,1 +1,43 @@
 /* Global styles */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-chat: "Roboto", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Unsung brand */
+  --color-ink: #1e1b4b;          /* deep indigo, primary */
+  --color-ink-soft: #3730a3;
+  --color-amber: #f2b544;        /* glue work / highlight */
+  --color-amber-soft: #fdf3dc;
+  --color-cream: #faf8f4;        /* app background */
+  --color-line: #e7e5e4;
+
+  /* Category chips */
+  --color-cat-unblocking: #f2b544;
+  --color-cat-review: #f28b82;
+  --color-cat-mentoring: #b39ddb;
+  --color-cat-documentation: #d7b98e;
+  --color-cat-onboarding: #4db6ac;
+  --color-cat-firefighting: #e57373;
+  --color-cat-core: #b0bec5;
+
+  /* Chat clone (Google Chat-like) */
+  --color-gchat-bg: #f6f8fc;
+  --color-gchat-green: #1e8e3e;
+  --color-gchat-blue: #0b57d0;
+  --color-gchat-selected: #d3e3fd;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: var(--font-sans); background: var(--color-cream); color: #1c1917; -webkit-font-smoothing: antialiased; }
+
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+/* Shared building blocks */
+.card { @apply bg-white rounded-2xl border border-stone-200 shadow-sm; }
+.btn, .btn-primary, .btn-amber, .btn-ghost { @apply inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed; }
+.btn-primary { @apply bg-ink text-white hover:bg-ink-soft; }
+.btn-amber { @apply bg-amber text-ink hover:brightness-95; }
+.btn-ghost { @apply border border-stone-300 bg-white text-stone-800 hover:bg-stone-50; }
+.chip { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium; }

@@ -1,0 +1,121 @@
+{
+  "description": "On-call firefighting threads, mostly led by Priya after hours.",
+  "threads": [
+    {
+      "space": "incidents",
+      "start": "2026-08-27T23:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "🔥 Sev2: invoice generation failing for ~8% of merchants since 23:20. I'm on it.",
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Root cause: expired cert on the PDF renderer's upstream. Rotating now.",
+          "after_minutes": 20,
+          "label": "firefighting"
+        },
+        {
+          "sender": "arjun",
+          "text": "Sorry, just saw this — anything I can do?",
+          "after_minutes": 13,
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Mitigated at 00:05, failures back to baseline. Writing the retro doc tomorrow.",
+          "after_minutes": 19,
+          "label": "firefighting"
+        }
+      ]
+    },
+    {
+      "space": "incidents",
+      "start": "2026-09-14T22:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Sev3: fraud-alerts consumer lag at 40 min, alerts delayed. Investigating.",
+          "label": "firefighting"
+        },
+        {
+          "sender": "rahul",
+          "text": "Joining. Looks like a poison message in partition 7.",
+          "after_minutes": 23,
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Skipped the poison message and added a DLQ. Lag recovering.",
+          "after_minutes": 15,
+          "label": "firefighting"
+        },
+        {
+          "sender": "rahul",
+          "text": "Lag back to zero. Nice work.",
+          "after_minutes": 24,
+          "label": "firefighting"
+        }
+      ]
+    },
+    {
+      "space": "incidents",
+      "start": "2026-10-05T21:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "🔥 Sev2: duplicate dunning emails being sent after the Billing v2 rollout. Paging Arjun.",
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Paused the dunning job to stop the bleeding. ~1.2k merchants got duplicates.",
+          "after_minutes": 10,
+          "label": "firefighting"
+        },
+        {
+          "sender": "arjun",
+          "text": "On it — the retry queue wasn't deduping on job id.",
+          "after_minutes": 18,
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Wrote the customer comms draft for support and an apology template.",
+          "after_minutes": 15,
+          "label": "firefighting"
+        },
+        {
+          "sender": "arjun",
+          "text": "Fix deployed, dunning resumed.",
+          "after_minutes": 13,
+          "label": "firefighting"
+        }
+      ]
+    },
+    {
+      "space": "incidents",
+      "start": "2026-10-19T23:00:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Sev3: billing reconciliation job failed at 23:00, finance report will be late. Looking.",
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Disk full on the reconciliation worker. Cleaned up old exports, re-running.",
+          "after_minutes": 19,
+          "label": "firefighting"
+        },
+        {
+          "sender": "priya",
+          "text": "Re-run complete, report delivered to finance at 01:10.",
+          "after_minutes": 16,
+          "label": "firefighting"
+        }
+      ]
+    }
+  ]
+}

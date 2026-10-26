@@ -1,0 +1,106 @@
+{
+  "L3": {
+    "Impact": {
+      "min_score": 25,
+      "description": "Delivers well-scoped tasks with guidance."
+    },
+    "Collaboration": {
+      "min_score": 20,
+      "description": "Works effectively within the immediate team."
+    },
+    "Knowledge": {
+      "min_score": 15,
+      "description": "Learns the team's systems; asks good questions."
+    },
+    "Quality": {
+      "min_score": 20,
+      "description": "Writes tested, reviewed code."
+    },
+    "Leadership": {
+      "min_score": 10,
+      "description": "Takes ownership of own tasks."
+    },
+    "Growth": {
+      "min_score": 20,
+      "description": "Seeks feedback and grows quickly."
+    }
+  },
+  "L4": {
+    "Impact": {
+      "min_score": 40,
+      "description": "Owns features end-to-end with measurable outcomes."
+    },
+    "Collaboration": {
+      "min_score": 40,
+      "description": "Unblocks teammates; reliable reviewer."
+    },
+    "Knowledge": {
+      "min_score": 35,
+      "description": "Shares knowledge through docs and answers."
+    },
+    "Quality": {
+      "min_score": 40,
+      "description": "Raises the quality bar through thorough reviews."
+    },
+    "Leadership": {
+      "min_score": 30,
+      "description": "Mentors newer engineers."
+    },
+    "Growth": {
+      "min_score": 30,
+      "description": "Expands scope beyond assigned work."
+    }
+  },
+  "L5": {
+    "Impact": {
+      "min_score": 60,
+      "description": "Drives multi-quarter projects with business-level impact."
+    },
+    "Collaboration": {
+      "min_score": 65,
+      "description": "Influences across teams; trusted by partner teams (cross-team influence)."
+    },
+    "Knowledge": {
+      "min_score": 55,
+      "description": "Creates reusable knowledge adopted beyond the team."
+    },
+    "Quality": {
+      "min_score": 55,
+      "description": "Sets technical direction and standards for the team."
+    },
+    "Leadership": {
+      "min_score": 60,
+      "description": "Grows others; leads incidents and onboarding."
+    },
+    "Growth": {
+      "min_score": 45,
+      "description": "Takes on ambiguous problems and new domains."
+    }
+  },
+  "L6": {
+    "Impact": {
+      "min_score": 75,
+      "description": "Shapes org-level outcomes."
+    },
+    "Collaboration": {
+      "min_score": 75,
+      "description": "Aligns multiple teams."
+    },
+    "Knowledge": {
+      "min_score": 65,
+      "description": "Recognised domain authority."
+    },
+    "Quality": {
+      "min_score": 65,
+      "description": "Owns architecture across systems."
+    },
+    "Leadership": {
+      "min_score": 80,
+      "description": "Builds and leads teams."
+    },
+    "Growth": {
+      "min_score": 55,
+      "description": "Develops the organisation."
+    }
+  }
+}

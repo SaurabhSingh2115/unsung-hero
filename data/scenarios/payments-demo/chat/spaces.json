@@ -1,0 +1,139 @@
+[
+  {
+    "id": "payments-team",
+    "name": "Payments Platform",
+    "kind": "space",
+    "description": "Whole team: announcements, launches, wins.",
+    "members": [
+      "priya",
+      "arjun",
+      "rahul",
+      "meera",
+      "karan",
+      "sana",
+      "dev",
+      "lin"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "eng-payments",
+    "name": "Payments Eng",
+    "kind": "space",
+    "description": "Engineering day-to-day: builds, reviews, help.",
+    "members": [
+      "priya",
+      "arjun",
+      "rahul",
+      "dev",
+      "karan",
+      "meera"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "design-product",
+    "name": "Design ⇄ Product",
+    "kind": "space",
+    "description": "Checkout redesign, research, specs.",
+    "members": [
+      "meera",
+      "sana",
+      "lin",
+      "karan"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "incidents",
+    "name": "Oncall & Incidents",
+    "kind": "space",
+    "description": "Pages, sevs, and retros.",
+    "members": [
+      "priya",
+      "arjun",
+      "rahul",
+      "dev",
+      "karan"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "ask-anything",
+    "name": "Ask Anything",
+    "kind": "space",
+    "description": "No question too small. New-joiner friendly.",
+    "members": [
+      "priya",
+      "arjun",
+      "rahul",
+      "meera",
+      "karan",
+      "sana",
+      "dev",
+      "lin"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "random",
+    "name": "Fun & Offsite",
+    "kind": "space",
+    "description": "Lunch, cricket, offsite planning. Not shared with Unsung.",
+    "members": [
+      "priya",
+      "arjun",
+      "rahul",
+      "meera",
+      "karan",
+      "sana",
+      "dev",
+      "lin"
+    ],
+    "opted_in": false
+  },
+  {
+    "id": "dm-arjun-priya",
+    "name": "",
+    "kind": "dm",
+    "description": "",
+    "members": [
+      "arjun",
+      "priya"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "dm-dev-priya",
+    "name": "",
+    "kind": "dm",
+    "description": "",
+    "members": [
+      "dev",
+      "priya"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "dm-karan-priya",
+    "name": "",
+    "kind": "dm",
+    "description": "",
+    "members": [
+      "karan",
+      "priya"
+    ],
+    "opted_in": true
+  },
+  {
+    "id": "dm-meera-sana",
+    "name": "",
+    "kind": "dm",
+    "description": "",
+    "members": [
+      "meera",
+      "sana"
+    ],
+    "opted_in": true
+  }
+]

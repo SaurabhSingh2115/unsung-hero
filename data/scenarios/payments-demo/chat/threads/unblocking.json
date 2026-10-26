@@ -1,0 +1,820 @@
+{
+  "description": "Someone is stuck, a teammate unblocks them. Only some say thanks.",
+  "threads": [
+    {
+      "space": "eng-payments",
+      "start": "2026-08-20T19:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "I'm stuck on the schema migration — the ledger table backfill keeps failing with a lock timeout after ~20 min. Any ideas?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Hit the same thing last quarter. Run it with lock_timeout=5s and split the backfill into batches of 10k rows keyed on created_at. I pushed a script to go/ledger-backfill — it resumes from the last batch if it dies.",
+          "after_minutes": 29,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "That worked, backfill finished in 14 min 🙌",
+          "after_minutes": 12,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-arjun-priya",
+      "start": "2026-09-03T20:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Hey, quick one — invoice retries are creating duplicate charges in staging. I've been staring at this for 2 hours.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Your idempotency key includes the retry attempt number, so every retry looks new. Key it on (invoice_id, billing_period) only. I left a suggested patch on your branch.",
+          "after_minutes": 18,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Ugh, of course. Fixed.",
+          "after_minutes": 26,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-14T19:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "CI is red on billing-service — test_invoice_retry is flaky and blocking my merge. Can't repro locally.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "It depends on wall-clock time. Freeze the clock with the fake_clock fixture and it goes green — I added an example in tests/conftest.py.",
+          "after_minutes": 39,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Green now, merging.",
+          "after_minutes": 6,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Thanks @Priya, that saved me hours!",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-17T20:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Blocked: terraform plan for the billing DB wants to destroy and recreate the instance?! Not touching apply until someone sanity checks.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Don't apply! The provider upgrade changed the default for deletion_protection. Pin it explicitly to true and add a lifecycle prevent_destroy. Plan should show an in-place update after that.",
+          "after_minutes": 26,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Plan is clean now, applying.",
+          "after_minutes": 21,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-arjun-priya",
+      "start": "2026-08-09T23:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Do you know why the tax service returns 403 from the billing canary? Works on my laptop.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Canary runs as the billing-canary service account which isn't in the tax-service allowlist. I filed the access request and pinged their oncall — should be live in 10 min.",
+          "after_minutes": 24,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "It's working now.",
+          "after_minutes": 27,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-10-14T22:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Currency rounding mismatch between ledger and invoice totals — off by 1 paisa on ~0.3% of invoices. Stuck on where it comes from.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Ledger rounds per line item, invoice rounds the total. Use banker's rounding at the total only and store line items unrounded — there's a helper in money/round.py.",
+          "after_minutes": 26,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Mismatch gone on the replay set.",
+          "after_minutes": 19,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-11T01:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Load test for Billing v2 OOMs at ~2k rps. Heap dump attached, I don't see what's leaking.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "The PDF renderer cache is unbounded — every invoice template variant is cached forever. Cap it with an LRU of 256. I paired with you on the fix branch.",
+          "after_minutes": 12,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Holding steady at 5k rps now!",
+          "after_minutes": 29,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-08-27T00:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Stuck setting up my dev env — `make bootstrap` fails at the protobuf step with a version error.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "You need protoc 25.x; the brew default is newer. Run `make tools` first — it pins the right versions. I've added this to the onboarding guide too.",
+          "after_minutes": 39,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "That fixed it, thank you!",
+          "after_minutes": 15,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Thank you @Priya, really appreciate it.",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-08-25T20:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Can't get the local Kafka consumer to read from the invoices topic, it just hangs.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Local broker advertises the docker hostname. Set KAFKA_ADVERTISED_LISTENERS=localhost:9092 in your .env and restart the stack.",
+          "after_minutes": 33,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Messages flowing 🎉",
+          "after_minutes": 8,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-17T22:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "I'm blocked on my first PR — the linter complains about import cycles I didn't introduce?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "That's the lint baseline being stale on your branch. Rebase on main; the cycle was fixed yesterday. Ping me if it persists.",
+          "after_minutes": 18,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Rebased and it passes.",
+          "after_minutes": 16,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-09-19T23:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "How do I get access to the staging payments dashboard? Request keeps getting rejected.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "You need to be in the payments-staging-readers group first — I added you. The dashboard request will auto-approve now.",
+          "after_minutes": 28,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "I'm in.",
+          "after_minutes": 30,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-12T00:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Stuck: feature flag fraud_rules_v2 isn't taking effect in canary even though it's on in the console.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Flags are cached for 10 min per pod, and canary pods were just rolled. Wait it out or hit /admin/flags/refresh on each pod.",
+          "after_minutes": 41,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Refreshed and it's live.",
+          "after_minutes": 22,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "dm-dev-priya",
+      "start": "2026-08-21T22:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Sorry for the DM again — my integration test can't find the fraud model fixtures.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Never apologise for asking! Fixtures are fetched lazily — run `make fixtures` once. I also wrote a short note on this in the onboarding guide.",
+          "after_minutes": 17,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Works now.",
+          "after_minutes": 22,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-13T01:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Stuck on the fraud rule engine — rules evaluate in a different order in prod vs staging.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Prod has the rules loaded from the config bucket, which sorts lexically. Add an explicit priority field and sort on it — I sketched it in a comment on your PR.",
+          "after_minutes": 35,
+          "label": "unblocking",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "rahul",
+          "text": "Deterministic now. Thanks!",
+          "after_minutes": 23,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        },
+        {
+          "sender": "rahul",
+          "text": "Huge thanks @Priya 🙏",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "incidents",
+      "start": "2026-08-14T19:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Can't figure out why fraud-alerts consumer lag spikes every night at 2am.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "That's the nightly reconciliation job saturating the same partition. Move it to its own consumer group with lower priority.",
+          "after_minutes": 26,
+          "label": "unblocking",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "rahul",
+          "text": "Lag is flat now.",
+          "after_minutes": 29,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-12T19:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Any idea why the pricing service p95 jumps when the catalog reloads? Blocked on my latency investigation.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Catalog reload invalidates the whole in-process cache at once. Stagger invalidation with jitter — I've seen it in the search team's postmortem, link in thread.",
+          "after_minutes": 26,
+          "label": "unblocking",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "rahul",
+          "text": "Jitter fixed the spikes.",
+          "after_minutes": 8,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-23T21:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Stuck on the checkout spec: is it technically possible to save a partial payment method if 3DS fails midway?",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Yes — tokenise before the 3DS challenge and mark the token pending; finalise on success, expire after 24h. I wrote a short tech note for the spec.",
+          "after_minutes": 41,
+          "label": "unblocking",
+          "mentions": [
+            "meera"
+          ]
+        },
+        {
+          "sender": "meera",
+          "text": "Perfect, adding it to the PRD.",
+          "after_minutes": 25,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-09-21T20:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Engineering question from design: what error codes can the card form actually show? I'm blocked on the error-state designs.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "Here's the full list mapped to user-friendly messages — 11 codes, 4 of them can be grouped. Put it in a table in the design doc for you.",
+          "after_minutes": 35,
+          "label": "unblocking",
+          "mentions": [
+            "sana"
+          ]
+        },
+        {
+          "sender": "sana",
+          "text": "This unblocks all the error screens, amazing.",
+          "after_minutes": 16,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-09-02T00:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "I need anonymised checkout drop-off data for my research readout but don't know where to find it.",
+          "label": "core"
+        },
+        {
+          "sender": "priya",
+          "text": "There's a pre-aggregated view in the analytics warehouse: checkout_funnel_daily. I granted you read access and shared a sample query.",
+          "after_minutes": 29,
+          "label": "unblocking",
+          "mentions": [
+            "lin"
+          ]
+        },
+        {
+          "sender": "lin",
+          "text": "Got it, thank you.",
+          "after_minutes": 27,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        },
+        {
+          "sender": "lin",
+          "text": "Thanks @Priya, that saved me hours!",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "priya"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "ask-anything",
+      "start": "2026-08-27T23:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "How do I run only the fraud tests? The full suite takes 25 minutes.",
+          "label": "core"
+        },
+        {
+          "sender": "rahul",
+          "text": "Use `pytest -m fraud` — the markers are set up in pytest.ini. Also add `-n auto` to parallelise.",
+          "after_minutes": 27,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Down to 3 minutes, thanks Rahul!",
+          "after_minutes": 10,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "@Rahul you're a lifesaver, thanks!",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-09-23T21:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Stuck on mocking the risk-score API in tests.",
+          "label": "core"
+        },
+        {
+          "sender": "rahul",
+          "text": "Use the RiskScoreFake class in testing/fakes.py rather than mocking HTTP — much less brittle.",
+          "after_minutes": 26,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Much cleaner, thanks!",
+          "after_minutes": 26,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Thank you @Rahul, really appreciate it.",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-13T20:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Blocked on understanding the invoice state machine — where are transitions defined?",
+          "label": "core"
+        },
+        {
+          "sender": "arjun",
+          "text": "billing/state.py — there's a diagram in the docstring. The tricky one is PENDING → VOID.",
+          "after_minutes": 14,
+          "label": "unblocking",
+          "mentions": [
+            "dev"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Got it, thanks Arjun",
+          "after_minutes": 30,
+          "label": "core",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "dev",
+          "text": "Thank you @Arjun, really appreciate it.",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "arjun"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-26T21:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Stuck on prioritising the redesign screens — which flows matter most for merchants?",
+          "label": "core"
+        },
+        {
+          "sender": "meera",
+          "text": "Top 3 by volume: card, UPI, saved methods. Start with saved methods, it has the worst drop-off in Lin's data.",
+          "after_minutes": 16,
+          "label": "unblocking",
+          "mentions": [
+            "sana"
+          ]
+        },
+        {
+          "sender": "sana",
+          "text": "Prioritised, thanks!",
+          "after_minutes": 11,
+          "label": "core",
+          "mentions": [
+            "meera"
+          ]
+        },
+        {
+          "sender": "sana",
+          "text": "Thank you @Meera, really appreciate it.",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "meera"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "design-product",
+      "start": "2026-09-03T00:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "Blocked on recruiting merchants for interviews — any contacts?",
+          "label": "core"
+        },
+        {
+          "sender": "meera",
+          "text": "I'll intro you to the merchant success team; they have a panel of 40 merchants who opted into research.",
+          "after_minutes": 43,
+          "label": "unblocking",
+          "mentions": [
+            "lin"
+          ]
+        },
+        {
+          "sender": "lin",
+          "text": "Thank you, booked 6 interviews!",
+          "after_minutes": 17,
+          "label": "core",
+          "mentions": [
+            "meera"
+          ]
+        },
+        {
+          "sender": "lin",
+          "text": "@Meera you're a lifesaver, thanks!",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "meera"
+          ]
+        }
+      ]
+    },
+    {
+      "space": "eng-payments",
+      "start": "2026-08-24T21:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Anyone know how to get the grafana billing dashboard to show per-region latency?",
+          "label": "core"
+        },
+        {
+          "sender": "rahul",
+          "text": "Add region to the group-by and switch the panel to a heatmap; I exported a JSON you can import.",
+          "after_minutes": 20,
+          "label": "unblocking",
+          "mentions": [
+            "arjun"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Nice, thanks!",
+          "after_minutes": 12,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        },
+        {
+          "sender": "arjun",
+          "text": "Thank you @Rahul, really appreciate it.",
+          "after_minutes": 5,
+          "label": "core",
+          "mentions": [
+            "rahul"
+          ]
+        }
+      ]
+    }
+  ]
+}

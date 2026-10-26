@@ -1,0 +1,115 @@
+{
+  "description": "Social chatter in a space that is NOT opted in to Unsung.",
+  "threads": [
+    {
+      "space": "random",
+      "start": "2026-08-12T21:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Lunch at the new dosa place today? 🍽️",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-10-07T21:30:00",
+      "messages": [
+        {
+          "sender": "rahul",
+          "text": "Anyone watching the cricket tonight?",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-09-02T21:30:00",
+      "messages": [
+        {
+          "sender": "meera",
+          "text": "Offsite venue shortlist is in the doc — vote by Thursday.",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-09-07T21:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Who's bringing snacks for Friday demo?",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-10-04T21:30:00",
+      "messages": [
+        {
+          "sender": "dev",
+          "text": "Is the coffee machine on 3 fixed yet?",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-08-30T21:30:00",
+      "messages": [
+        {
+          "sender": "lin",
+          "text": "Sharing photos from the Singapore meetup 📸",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-10-11T21:30:00",
+      "messages": [
+        {
+          "sender": "karan",
+          "text": "Team dinner on the 30th, RSVP please!",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-08-19T21:30:00",
+      "messages": [
+        {
+          "sender": "priya",
+          "text": "Lost: blue water bottle near the 4th floor pantry 😅",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-10-15T21:30:00",
+      "messages": [
+        {
+          "sender": "sana",
+          "text": "Happy birthday Meera!! 🎂",
+          "label": "core"
+        }
+      ]
+    },
+    {
+      "space": "random",
+      "start": "2026-10-15T21:30:00",
+      "messages": [
+        {
+          "sender": "arjun",
+          "text": "Diwali decorations committee needs 2 more volunteers",
+          "label": "core"
+        }
+      ]
+    }
+  ]
+}
