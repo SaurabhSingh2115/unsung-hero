@@ -1,0 +1,20 @@
+# Runtime dependencies for the Unsung Hero backend (Python 3.13)
+# Install: pip install -r requirements.txt
+
+# Web API
+fastapi==0.143.3
+uvicorn==0.54.0
+
+# Config & validation
+pydantic==2.14.1
+pydantic-settings==2.16.0
+python-dotenv==1.2.4
+
+# Database
+SQLAlchemy==2.1.5
+
+# Graph metrics (help graph, bridge, ripple)
+networkx==3.7
+
+# Gemini API
+google-genai==2.33.0
