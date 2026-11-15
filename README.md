@@ -9,8 +9,34 @@ Architecture principle: **Gemini interprets, code calculates**. Gemini classifie
 ## Quick Start: Running the Application
 
 ### Prerequisites
-- **Python 3.11+** (virtual environment located in `backend/.venv`)
+- **Python 3.11+** (3.13 recommended; virtual environment located in `backend/.venv`)
 - **Node.js 18+ & npm** (e.g. from NVM: `export PATH="$HOME/.nvm/versions/node/v24.16.0/bin:$PATH"`)
+
+---
+
+### Step 0: First-time Setup
+
+```bash
+# Create your local config from the template (then add GEMINI_API_KEY if you have one)
+cp .env.example .env
+
+cd backend
+
+# Create the Python virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install backend dependencies
+pip install -r requirements.txt
+
+# (Optional) Also install dev/test dependencies: pytest, httpx
+pip install -r requirements-dev.txt
+```
+
+| File | Contents |
+| :--- | :--- |
+| `backend/requirements.txt` | Runtime deps: FastAPI, Uvicorn, Pydantic, SQLAlchemy, NetworkX, google-genai |
+| `backend/requirements-dev.txt` | Everything in `requirements.txt` + pytest & httpx |
 
 ---
 
@@ -55,6 +81,31 @@ npm start
 > **Open the App**: Visit [http://localhost:4200](http://localhost:4200) in your browser.
 
 *Note: The frontend is also pre-built into `frontend/dist/frontend/browser`. When you start FastAPI without `npm start`, visiting [http://localhost:8000](http://localhost:8000) serves the client directly.*
+
+---
+
+### Running Tests
+
+```bash
+cd backend
+source .venv/bin/activate
+pip install -r requirements-dev.txt   # first time only
+python -m pytest
+```
+
+---
+
+### Docker (Cloud Run)
+
+The backend ships with a `Dockerfile` that installs from `requirements.txt` and serves on `$PORT` (default `8080`):
+
+```bash
+cd backend
+docker build -t unsung-hero-backend .
+docker run --rm -p 8080:8080 --env-file ../.env unsung-hero-backend
+```
+
+> Then open [http://localhost:8080/docs](http://localhost:8080/docs).
 
 ---
 
