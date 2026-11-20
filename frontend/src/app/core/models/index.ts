@@ -94,7 +94,7 @@ export interface GraphLink {
 }
 export interface TeamGraph { team_id: string; team_name: string; nodes: GraphNode[]; links: GraphLink[]; }
 
-export type AlertType = 'recognition_gap' | 'load_imbalance' | 'bus_factor' | 'ghost_credit' | 'burnout';
+export type AlertType = 'recognition_gap' | 'load_imbalance' | 'bus_factor' | 'ghost_credit' | 'burnout' | 'glue_trap';
 export interface Alert {
   id: string;
   type: AlertType;
@@ -277,6 +277,46 @@ export interface RunbookDraft {
   unverified_removed: number;
   model: 'gemini' | 'heuristic';
   markdown: string;
+}
+
+// ---------- Leave simulator ("what if X is out?") ----------
+export interface AbsenceAffected {
+  person: Person;
+  help_from_absent: number;
+  total_help_received: number;
+  dependency: number;          // 0..1 share of their help that came from the absent person
+  other_helpers: string[];
+  stranded: boolean;
+}
+export interface AbsenceLoadShift {
+  person: Person;
+  before: number;
+  after: number;
+  absorbed: number;
+  before_ratio: number;
+  after_ratio: number;
+  status_before: LoadStatus;
+  status_after: LoadStatus;
+}
+export interface AbsenceApprentice { person: Person; items: number; categories: Record<string, number>; example_ids: string[]; }
+export interface AbsenceKnowledgeItem { activity: Activity & { category: Category }; learned_by: Person[]; }
+export interface AbsenceSim {
+  absent: Person;
+  headline: string;
+  help_share_lost: number;
+  team_help_total: number;
+  absent_help: number;
+  people_affected: number;
+  stranded: string[];
+  orphaned_count: number;
+  orphaned_by_category: Record<string, number>;
+  solo_incidents: number;
+  knowledge_items: AbsenceKnowledgeItem[];
+  apprentices: AbsenceApprentice[];
+  affected: AbsenceAffected[];
+  load_shift: AbsenceLoadShift[];
+  median_help: number;
+  recommendations: string[];
 }
 
 export interface OneOnOne {

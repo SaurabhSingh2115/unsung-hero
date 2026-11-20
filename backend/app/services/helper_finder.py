@@ -11,7 +11,6 @@ Gemini interprets, code calculates:
 from __future__ import annotations
 
 import math
-import re
 import statistics
 from collections import Counter
 from typing import Any
@@ -19,6 +18,7 @@ from typing import Any
 from app.core.constants import Category
 from app.gemini.client import generate_structured
 from app.ingestion.pii import strip_pii
+from app.metrics.text_match import STOPWORDS, tokenize  # noqa: F401  (re-exported for callers)
 from app.models.activity import Activity
 from app.models.classification import Classification
 from app.models.person import Person
@@ -35,39 +35,12 @@ BUSY_RATIO = 1.5
 OVERLOADED_RATIO = 3.0
 LOAD_FACTOR = {"ok": 1.0, "busy": 0.8, "overloaded": 0.5}
 
-STOPWORDS = {
-    "the", "and", "for", "with", "that", "this", "from", "have", "has", "had", "you", "your", "are",
-    "was", "were", "but", "not", "can", "cant", "could", "would", "should", "how", "what", "why",
-    "when", "where", "who", "does", "doing", "did", "into", "out", "our", "its", "it's", "all", "any",
-    "get", "got", "getting", "keep", "keeps", "kept", "just", "like", "need", "needs", "help", "stuck",
-    "anyone", "someone", "know", "idea", "ideas", "please", "thanks", "about", "after", "before",
-    "there", "their", "then", "than", "them", "they", "will", "also", "some", "one", "two", "use",
-    "using", "used", "way", "make", "made", "still", "very", "really", "here", "being", "been", "too",
-    "i'm", "im", "me", "my", "we", "us", "is", "am", "be", "to", "of", "in", "on", "at", "it", "a",
-    "an", "or", "if", "so", "do", "up", "no", "yes", "first", "new", "again", "every", "each",
-    "maybe", "probably", "think", "seems", "issue", "problem", "thing", "things", "work", "working",
-}
-
 TERMS_SCHEMA: dict[str, Any] = {
     "title": "helper_terms",
     "type": "object",
     "properties": {"terms": {"type": "array", "items": {"type": "string"}}},
     "required": ["terms"],
 }
-
-
-def _stem(tok: str) -> str:
-    if len(tok) > 4 and tok.endswith("ies"):
-        return tok[:-3] + "y"  # retries -> retry
-    for suf in ("ing", "ed", "es", "s"):
-        if len(tok) > len(suf) + 3 and tok.endswith(suf):
-            return tok[: -len(suf)]
-    return tok
-
-
-def tokenize(text: str) -> set[str]:
-    raw = re.findall(r"[a-z0-9_]+", text.lower())
-    return {_stem(t) for t in raw if len(t) >= 3 and t not in STOPWORDS and not t.isdigit()}
 
 
 def expand_terms(question: str, use_llm: bool = True) -> tuple[list[str], str]:

@@ -4,7 +4,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
-  Activity, Alert, Annotation, AppConfig, BiasCheck, BragDoc, ChatMessage, ChatSpace, Digest, Draft,
+  AbsenceSim, Activity, Alert, Annotation, AppConfig, BiasCheck, BragDoc, ChatMessage, ChatSpace, Digest, Draft,
   EvidenceItem, HelperFinderResult, OneOnOne, PeerCandidate, PeerFeedback, Person, PipelineStatus, Profile,
   Project, Recognition, ReviewBiasCheck, RunbookDraft, SourceRecord, TeamGraph, TeamStats, ThankDraft,
   Translation, UnthankedHelper,
@@ -29,6 +29,9 @@ export class ApiService {
   teamAlerts(teamId: string): Observable<Alert[]> { return this.http.get<Alert[]>(`${this.base}/team/${teamId}/alerts`); }
   teamStats(teamId: string): Observable<TeamStats> { return this.http.get<TeamStats>(`${this.base}/team/${teamId}/stats`); }
   biasCheck(teamId: string): Observable<BiasCheck> { return this.http.get<BiasCheck>(`${this.base}/team/${teamId}/bias-check`); }
+  absenceSim(teamId: string, personId: string): Observable<AbsenceSim> {
+    return this.http.get<AbsenceSim>(`${this.base}/team/${teamId}/absence-sim/${personId}`);
+  }
 
   // ---- person ----
   profile(personId: string, asManager = false): Observable<Profile> {

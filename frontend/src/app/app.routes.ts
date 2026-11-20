@@ -30,6 +30,8 @@ export const routes: Routes = [
           { path: 'one-on-one', title: 'Unsung — 1:1 Prep', loadComponent: () => import('./features/manager/one-on-one-page').then(m => m.OneOnOnePage) },
           { path: 'one-on-one/:id', title: 'Unsung — 1:1 Prep', loadComponent: () => import('./features/manager/one-on-one-page').then(m => m.OneOnOnePage) },
           { path: 'bias', title: 'Unsung — Bias check', loadComponent: () => import('./features/manager/bias-page').then(m => m.BiasPage) },
+          { path: 'resilience', title: 'Unsung — Leave simulator', loadComponent: () => import('./features/manager/resilience-page').then(m => m.ResiliencePage) },
+          { path: 'resilience/:id', title: 'Unsung — Leave simulator', loadComponent: () => import('./features/manager/resilience-page').then(m => m.ResiliencePage) },
         ],
       },
       { path: 'person/:id', title: 'Unsung — Profile', canActivate: [managerReadyGuard], loadComponent: () => import('./features/profile/profile-page').then(m => m.ProfilePage) },

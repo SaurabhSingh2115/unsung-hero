@@ -97,6 +97,7 @@ export class Shell {
         { label: 'Review drafts', icon: 'description', link: '/manager/review' },
         { label: '1:1 Prep', icon: 'groups', link: '/manager/one-on-one' },
         { label: 'Bias check', icon: 'balance', link: '/manager/bias' },
+        { label: 'Leave simulator', icon: 'flight_takeoff', link: '/manager/resilience' },
       ]
     : [
         { label: 'My Profile', icon: 'person', link: '/me', exact: true },

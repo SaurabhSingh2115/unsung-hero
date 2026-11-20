@@ -108,6 +108,7 @@ class AlertType:
     BUS_FACTOR: Final[str] = "bus_factor"
     GHOST_CREDIT: Final[str] = "ghost_credit"
     BURNOUT: Final[str] = "burnout"
+    GLUE_TRAP: Final[str] = "glue_trap"
 
     ALL: Final[tuple[str, ...]] = (
         RECOGNITION_GAP,
@@ -115,6 +116,7 @@ class AlertType:
         BUS_FACTOR,
         GHOST_CREDIT,
         BURNOUT,
+        GLUE_TRAP,
     )
 
 

@@ -10,6 +10,7 @@ export const ALERT_META: Record<AlertType, { label: string; icon: string }> = {
   bus_factor: { label: 'Bus factor', icon: 'warning' },
   ghost_credit: { label: 'Ghost credit', icon: 'visibility' },
   burnout: { label: 'Burnout signal', icon: 'local_fire_department' },
+  glue_trap: { label: 'Glue trap', icon: 'trending_down' },
 };
 
 const SEV: Record<Alert['severity'], string> = {
@@ -37,8 +38,15 @@ const SEV: Record<Alert['severity'], string> = {
             @for (pid of a.person_ids; track pid) {
               <a [routerLink]="['/person', pid]"><app-person-chip [id]="pid" /></a>
             }
+            @if (a.type === 'bus_factor' && a.person_ids.length) {
+              <a [routerLink]="['/manager/resilience', a.person_ids[0]]"
+                 class="ml-auto inline-flex items-center gap-0.5 text-xs font-semibold text-ink hover:underline">
+                <span class="material-symbols-outlined" style="font-size:14px">flight_takeoff</span>Simulate leave
+              </a>
+            }
             @if (a.person_ids.length) {
-              <a [routerLink]="['/person', a.person_ids[0]]" class="ml-auto inline-flex items-center gap-0.5 text-xs font-medium text-ink-soft hover:underline">
+              <a [routerLink]="['/person', a.person_ids[0]]" class="inline-flex items-center gap-0.5 text-xs font-medium text-ink-soft hover:underline"
+                 [class.ml-auto]="a.type !== 'bus_factor'">
                 {{ a.evidence_ids.length }} evidence <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span>
               </a>
             }
