@@ -212,6 +212,43 @@ export interface BragMonth { month: string; label: string; items: EvidenceItem[]
 export interface BragDoc { person_id: string; months: BragMonth[]; }
 export interface Translation { activity_id: string; original: string; business_impact: string; model: 'gemini' | 'heuristic'; }
 
+// ---------- Collaboration: Peer feedback & Find a helper ----------
+export interface PeerCandidate { peer: Person; interactions: number; categories: Record<string, number>; }
+export interface PeerFeedback {
+  writer_id: string;
+  peer: Person;
+  title: string;
+  summary: string;
+  sections: DraftSection[];
+  growth: string;
+  citations_count: number;
+  unverified_removed: number;
+  evidence_count: number;
+  model: 'gemini' | 'heuristic';
+  markdown: string;
+}
+export type LoadStatus = 'ok' | 'busy' | 'overloaded';
+export interface HelperSuggestion {
+  person: Person;
+  rank: number;
+  relevance: number;
+  load_ratio: number;
+  load_status: LoadStatus;
+  score: number;
+  matched_terms: string[];
+  evidence: (Activity & { category: Category })[];
+  reason: string;
+  ask_message: string;
+}
+export interface HelperFinderResult {
+  question: string;
+  terms: string[];
+  suggestions: HelperSuggestion[];
+  protected: string[];
+  bus_factor_warning: string | null;
+  model: 'gemini' | 'heuristic';
+}
+
 export interface OneOnOne {
   person: Person;
   wins: EvidenceItem[];

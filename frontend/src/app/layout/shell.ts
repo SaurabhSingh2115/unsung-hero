@@ -103,6 +103,8 @@ export class Shell {
         { label: 'Brag Doc', icon: 'article', link: '/me/brag' },
         { label: 'Promotion Packet', icon: 'rocket_launch', link: '/me/promo' },
         { label: 'Say Thanks', icon: 'volunteer_activism', link: '/me/thanks', badge: this.state.unthankedCount() },
+        { label: 'Who can unblock me?', icon: 'travel_explore', link: '/me/find-helper' },
+        { label: 'Peer Feedback', icon: 'rate_review', link: '/me/peer-feedback' },
         { label: 'Privacy', icon: 'lock', link: '/me/privacy' },
         { label: 'Log Activity', icon: 'history', link: '/me/log' },
       ]);

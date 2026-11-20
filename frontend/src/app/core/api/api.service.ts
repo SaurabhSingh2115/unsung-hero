@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
   Activity, Alert, Annotation, AppConfig, BiasCheck, BragDoc, ChatMessage, ChatSpace, Digest, Draft,
-  EvidenceItem, OneOnOne, Person, PipelineStatus, Profile, Project, Recognition, SourceRecord, TeamGraph,
-  TeamStats, ThankDraft, Translation, UnthankedHelper,
+  EvidenceItem, HelperFinderResult, OneOnOne, PeerCandidate, PeerFeedback, Person, PipelineStatus, Profile,
+  Project, Recognition, SourceRecord, TeamGraph, TeamStats, ThankDraft, Translation, UnthankedHelper,
 } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -58,6 +58,17 @@ export class ApiService {
     return this.http.post<Translation[]>(`${this.base}/person/${personId}/translate`, { activity_ids });
   }
   oneOnOne(personId: string): Observable<OneOnOne> { return this.http.get<OneOnOne>(`${this.base}/person/${personId}/one-on-one`); }
+
+  // ---- collaboration ----
+  peerCandidates(personId: string): Observable<PeerCandidate[]> {
+    return this.http.get<PeerCandidate[]>(`${this.base}/person/${personId}/peer-feedback/candidates`);
+  }
+  peerFeedback(personId: string, peerId: string): Observable<PeerFeedback> {
+    return this.http.post<PeerFeedback>(`${this.base}/person/${personId}/peer-feedback`, { peer_id: peerId });
+  }
+  findHelper(personId: string, question: string): Observable<HelperFinderResult> {
+    return this.http.post<HelperFinderResult>(`${this.base}/person/${personId}/find-helper`, { question });
+  }
 
   // ---- activity ----
   activity(activityId: string): Observable<SourceRecord> { return this.http.get<SourceRecord>(`${this.base}/activity/${activityId}`); }

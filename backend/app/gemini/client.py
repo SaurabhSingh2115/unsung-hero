@@ -1,12 +1,16 @@
 """Gemini client using google-genai SDK with structured output and disk caching."""
 import json
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
 from app.core.config import get_settings
 from app.gemini.cache import get_cache
 
 logger = logging.getLogger(__name__)
+
+GEMINI_TIMEOUT_S = 12  # after this we fall back to the deterministic heuristic path
+_EXECUTOR = ThreadPoolExecutor(max_workers=4, thread_name_prefix="gemini")
 
 
 def generate_structured(
@@ -31,7 +35,10 @@ def generate_structured(
     try:
         from google import genai
 
-        client = genai.Client(api_key=settings.gemini_api_key)
+        client = genai.Client(
+            api_key=settings.gemini_api_key,
+            http_options={"timeout": GEMINI_TIMEOUT_S * 1000, "retry_options": {"attempts": 1}},
+        )
 
         kwargs: dict[str, Any] = {
             "model": settings.gemini_model,
@@ -46,7 +53,9 @@ def generate_structured(
         if system_instruction:
             kwargs["system_instruction"] = system_instruction
 
-        interaction = client.interactions.create(**kwargs)
+        # Hard deadline: never let a slow/hung API call freeze a request (falls back to heuristics)
+        future = _EXECUTOR.submit(client.interactions.create, **kwargs)
+        interaction = future.result(timeout=GEMINI_TIMEOUT_S)
         text = interaction.output_text or ""
         # Strip markdown fences if present
         text = text.strip()

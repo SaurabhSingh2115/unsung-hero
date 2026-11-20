@@ -38,6 +38,8 @@ export const routes: Routes = [
       { path: 'me/brag', title: 'Unsung — Brag doc', loadComponent: () => import('./features/employee/brag-page').then(m => m.BragPage) },
       { path: 'me/promo', title: 'Unsung — Promotion packet', loadComponent: () => import('./features/employee/promo-page').then(m => m.PromoPage) },
       { path: 'me/thanks', title: 'Unsung — Say thanks', loadComponent: () => import('./features/employee/thanks-page').then(m => m.ThanksPage) },
+      { path: 'me/peer-feedback', title: 'Unsung — Peer feedback', loadComponent: () => import('./features/employee/peer-feedback-page').then(m => m.PeerFeedbackPage) },
+      { path: 'me/find-helper', title: 'Unsung — Who can unblock me?', loadComponent: () => import('./features/employee/find-helper-page').then(m => m.FindHelperPage) },
       { path: 'me/privacy', title: 'Unsung — Privacy', loadComponent: () => import('./features/employee/privacy-page').then(m => m.PrivacyPage) },
       { path: 'me/log', title: 'Unsung — Log activity', loadComponent: () => import('./features/employee/log-page').then(m => m.LogPage) },
 

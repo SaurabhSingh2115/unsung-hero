@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, get_db
-from app.api.routes import activity, person, recognition, team
+from app.api.routes import activity, collab, person, recognition, team
 from app.core.config import get_settings
 from app.core.constants import SourceType
 from app.ingestion.pipeline import sync_chat
@@ -22,6 +22,7 @@ from app.schemas.person import AppConfigOut, OptInIn, PersonOut, ProjectOut
 api_router = APIRouter()
 api_router.include_router(team.router)
 api_router.include_router(person.router)
+api_router.include_router(collab.router)
 api_router.include_router(activity.router)
 api_router.include_router(recognition.router)
 
