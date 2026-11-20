@@ -6,7 +6,8 @@ import { environment } from '../../../environments/environment';
 import {
   Activity, Alert, Annotation, AppConfig, BiasCheck, BragDoc, ChatMessage, ChatSpace, Digest, Draft,
   EvidenceItem, HelperFinderResult, OneOnOne, PeerCandidate, PeerFeedback, Person, PipelineStatus, Profile,
-  Project, Recognition, SourceRecord, TeamGraph, TeamStats, ThankDraft, Translation, UnthankedHelper,
+  Project, Recognition, ReviewBiasCheck, RunbookDraft, SourceRecord, TeamGraph, TeamStats, ThankDraft,
+  Translation, UnthankedHelper,
 } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -68,6 +69,12 @@ export class ApiService {
   }
   findHelper(personId: string, question: string): Observable<HelperFinderResult> {
     return this.http.post<HelperFinderResult>(`${this.base}/person/${personId}/find-helper`, { question });
+  }
+  reviewBiasCheck(personId: string, text: string): Observable<ReviewBiasCheck> {
+    return this.http.post<ReviewBiasCheck>(`${this.base}/person/${personId}/review-bias-check`, { text });
+  }
+  draftRunbook(personId: string, topic: string, activityIds: string[] = []): Observable<RunbookDraft> {
+    return this.http.post<RunbookDraft>(`${this.base}/person/${personId}/draft-runbook`, { topic, activity_ids: activityIds });
   }
 
   // ---- activity ----

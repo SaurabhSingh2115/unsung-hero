@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api/api.service';
 import { SessionService } from '../../core/auth/session.service';
-import { HelperFinderResult, HelperSuggestion, LoadStatus } from '../../core/models';
+import { HelperFinderResult, HelperSuggestion, LoadStatus, RunbookDraft } from '../../core/models';
 import { parseLink } from '../../core/util/link';
 import { Loadable } from '../../core/util/loadable';
 import { Avatar } from '../../shared/avatar';
@@ -96,9 +96,12 @@ const LOAD_UI: Record<LoadStatus, { label: string; cls: string; icon: string }> 
                 }
               </ul>
 
-              <div class="mt-4 flex gap-2 pl-10">
+              <div class="mt-4 flex flex-wrap gap-2 pl-10">
                 <button class="btn-ghost" (click)="copyAsk(s)"><span class="material-symbols-outlined text-base">content_copy</span>Copy a message to {{ s.person.first_name }}</button>
                 <a class="btn-ghost" routerLink="/chat"><span class="material-symbols-outlined text-base">chat</span>Open Chat</a>
+                <button class="btn-amber ml-auto" (click)="openRunbook(s, r.question)">
+                  <span class="material-symbols-outlined text-base">menu_book</span>Draft Runbook &amp; Credit {{ s.person.first_name }}
+                </button>
               </div>
             </div>
           } @empty {
@@ -107,6 +110,48 @@ const LOAD_UI: Record<LoadStatus, { label: string; cls: string; icon: string }> 
         </div>
       }
     </div>
+
+    <!-- Runbook slide-over drawer -->
+    @if (runbookOpen()) {
+      <div class="fixed inset-0 z-40 bg-ink/25" (click)="closeRunbook()"></div>
+      <aside class="fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col bg-white shadow-2xl" role="dialog" aria-label="Runbook draft">
+        <header class="flex items-center gap-3 border-b border-line px-5 py-4">
+          <span class="material-symbols-outlined text-2xl text-amber">menu_book</span>
+          <div class="flex-1">
+            <div class="font-semibold text-ink">Auto-drafted Runbook</div>
+            @if (runbook.data(); as rb) {
+              <div class="text-xs text-stone-500">Suggested: <code>{{ rb.suggested_go_link }}</code> · Crediting {{ rb.author.name }}</div>
+            }
+          </div>
+          <button class="rounded-lg p-1 hover:bg-stone-100" (click)="closeRunbook()" aria-label="Close"><span class="material-symbols-outlined">close</span></button>
+        </header>
+        <div class="flex-1 overflow-y-auto p-5">
+          @if (runbook.loading()) { <app-skeleton [rows]="6" /> }
+          @if (runbook.error(); as e) { <app-error-state [message]="e" (retry)="closeRunbook()" /> }
+          @if (runbook.data(); as rb) {
+            <h2 class="text-lg font-bold text-ink">{{ rb.title }}</h2>
+            <p class="mt-1 text-sm text-stone-600">{{ rb.summary }}</p>
+            @for (sec of rb.sections; track sec.title) {
+              <h3 class="mt-5 text-xs font-semibold uppercase tracking-wide text-stone-500">{{ sec.title }}</h3>
+              <ul class="mt-2 space-y-2">
+                @for (c of sec.claims; track $index) {
+                  <li class="rounded-xl border border-line p-3 text-sm text-stone-800">
+                    <div>{{ c.text }}</div>
+                    <div class="mt-1.5 flex flex-wrap gap-1.5">@for (aid of c.activity_ids; track aid) { <app-citation-chip [id]="aid" /> }</div>
+                  </li>
+                }
+              </ul>
+            }
+          }
+        </div>
+        @if (runbook.data(); as rb) {
+          <footer class="flex items-center gap-3 border-t border-line p-5">
+            <span class="chip bg-emerald-50 text-emerald-800">{{ rb.citations_count }} citations</span>
+            <button class="btn-amber ml-auto" (click)="copyRunbook(rb)"><span class="material-symbols-outlined text-base">content_copy</span>Copy Markdown for Docs</button>
+          </footer>
+        }
+      </aside>
+    }
   `,
 })
 export class FindHelperPage {
@@ -116,6 +161,8 @@ export class FindHelperPage {
 
   readonly question = signal('');
   readonly result = new Loadable<HelperFinderResult>();
+  readonly runbook = new Loadable<RunbookDraft>();
+  readonly runbookOpen = signal(false);
   readonly examples = [
     'Kafka consumer lag keeps growing, maybe a poison message?',
     'My pytest tests are flaky and slow',
@@ -133,6 +180,20 @@ export class FindHelperPage {
   copyAsk(s: HelperSuggestion) {
     navigator.clipboard?.writeText(s.ask_message).then(
       () => this.toast.success(`Message to ${s.person.first_name} copied`),
+      () => this.toast.error('Could not copy to clipboard'),
+    );
+  }
+
+  openRunbook(s: HelperSuggestion, topic: string) {
+    this.runbookOpen.set(true);
+    this.runbook.load(this.api.draftRunbook(s.person.id, topic, s.evidence.map(e => e.id)));
+  }
+
+  closeRunbook() { this.runbookOpen.set(false); this.runbook.cancel(); }
+
+  copyRunbook(rb: RunbookDraft) {
+    navigator.clipboard?.writeText(rb.markdown).then(
+      () => this.toast.success(`Runbook copied (${rb.suggested_go_link}) — ${rb.author.first_name} credited`),
       () => this.toast.error('Could not copy to clipboard'),
     );
   }

@@ -4,8 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, get_db
-from app.core.security import require_self
+from app.core.security import require_manager, require_self
 from app.generation.peer_feedback import build_peer_feedback, list_peer_candidates
+from app.generation.review_bias_lens import check_review_bias
+from app.generation.runbook_draft import build_runbook_draft
 from app.metrics.help_graph import build_team_graph_data
 from app.models.activity import Activity
 from app.models.classification import Classification
@@ -17,6 +19,12 @@ from app.schemas.collab import (
     PeerCandidateOut,
     PeerFeedbackIn,
     PeerFeedbackOut,
+)
+from app.schemas.differentiators import (
+    ReviewBiasCheckIn,
+    ReviewBiasCheckOut,
+    RunbookDraftIn,
+    RunbookDraftOut,
 )
 from app.services.helper_finder import find_helpers
 
@@ -71,3 +79,45 @@ def find_helper(
         raise HTTPException(status_code=422, detail="Describe what you're stuck on")
     people, activities, classifications, help_given = _team_context(db, user.team)
     return find_helpers(user, body.question, people, activities, classifications, help_given)
+
+
+@router.post("/{person_id}/review-bias-check", response_model=ReviewBiasCheckOut)
+def review_bias_check(
+    person_id: str,
+    body: ReviewBiasCheckIn,
+    db: Session = Depends(get_db),
+    user: Person = Depends(get_current_user),
+):
+    require_manager(user)
+    target = db.get(Person, person_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="Person not found")
+    if not body.text.strip():
+        raise HTTPException(status_code=422, detail="Provide review text to analyze")
+    activities = list(db.scalars(select(Activity).where(Activity.actor_id == person_id)).all())
+    classifications = {c.activity_id: c for c in db.scalars(select(Classification)).all()}
+    return check_review_bias(target, body.text, activities, classifications)
+
+
+@router.post("/{person_id}/draft-runbook", response_model=RunbookDraftOut)
+def draft_runbook(
+    person_id: str,
+    body: RunbookDraftIn,
+    db: Session = Depends(get_db),
+    user: Person = Depends(get_current_user),
+):
+    author = db.get(Person, person_id)
+    if not author:
+        raise HTTPException(status_code=404, detail="Person not found")
+    if not body.topic.strip():
+        raise HTTPException(status_code=422, detail="Provide a runbook topic")
+    all_acts = list(
+        db.scalars(select(Activity).where(Activity.actor_id == person_id)).all()
+    )
+    if body.activity_ids:
+        id_set = set(body.activity_ids)
+        acts = [a for a in all_acts if a.id in id_set]
+    else:
+        acts = all_acts
+    classifications = {c.activity_id: c for c in db.scalars(select(Classification)).all()}
+    return build_runbook_draft(author, body.topic, acts, classifications)

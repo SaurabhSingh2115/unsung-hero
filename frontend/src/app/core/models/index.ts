@@ -249,6 +249,36 @@ export interface HelperFinderResult {
   model: 'gemini' | 'heuristic';
 }
 
+// ---------- Differentiators: Review Bias Lens & Silo-to-Runbook ----------
+export interface BiasFinding {
+  original: string;
+  issue_type: 'communal_framing' | 'uncited_claim';
+  matched_terms: string[];
+  explanation: string;
+  suggested_rewrite: string;
+  activity_ids: string[];
+}
+export interface ReviewBiasCheck {
+  person_id: string;
+  overall_status: 'strong' | 'needs_evidence' | 'bias_risk';
+  cited_count: number;
+  uncited_count: number;
+  communal_count: number;
+  findings: BiasFinding[];
+  summary: string;
+}
+export interface RunbookDraft {
+  author: Person;
+  title: string;
+  suggested_go_link: string;
+  summary: string;
+  sections: DraftSection[];
+  citations_count: number;
+  unverified_removed: number;
+  model: 'gemini' | 'heuristic';
+  markdown: string;
+}
+
 export interface OneOnOne {
   person: Person;
   wins: EvidenceItem[];
