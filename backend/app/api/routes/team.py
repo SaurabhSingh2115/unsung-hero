@@ -4,8 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, get_db
+from app.core.config import get_settings
 from app.core.security import require_manager
 from app.metrics.help_graph import build_team_graph_data
+from app.metrics.recognition_gap import compute_bias_check
 from app.models.activity import Activity
 from app.models.classification import Classification
 from app.models.person import Person
@@ -90,25 +92,17 @@ def get_bias_check(
 ):
     require_manager(user)
     # Aggregated recognition patterns: remote vs office
+    people = list(
+        db.scalars(select(Person).where(Person.team == team_id, Person.opted_in.is_(True))).all()
+    )
+    activities = list(db.scalars(select(Activity)).all())
+    classifications = {c.activity_id: c for c in db.scalars(select(Classification)).all()}
+    recognitions = list(db.scalars(select(Recognition)).all())
+
+    nodes, _ = build_team_graph_data(people, activities, classifications, recognitions)
+    result = compute_bias_check(nodes, min_group_size=get_settings().min_group_size)
     return BiasCheckOut(
-        min_group_size=3,
-        groups=[
-            BiasGroupOut(
-                group="office",
-                size=5,
-                suppressed=False,
-                help_given=42,
-                thanks_received=28,
-                thanks_per_help=0.67,
-            ),
-            BiasGroupOut(
-                group="remote",
-                size=3,
-                suppressed=False,
-                help_given=18,
-                thanks_received=6,
-                thanks_per_help=0.33,
-            ),
-        ],
-        note="Remote employees show a 50% lower thanks-per-help ratio compared to in-office peers.",
+        min_group_size=result["min_group_size"],
+        groups=[BiasGroupOut(**g) for g in result["groups"]],
+        note=result["note"],
     )
